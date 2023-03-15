@@ -6,32 +6,29 @@ createApp({
         return {
             message: 'Welcome to the new and improved Netflix!',
             search: '',
-            movieMatches: [],
-            movies: [
-                {
-                    title: 'The Matrix',
-                    poster: 'https://m.media-amazon.com/images/I/91++WV6FP4L._AC_SL1500_.jpg',
-                    directors: [
-                        'Wachowski 1',
-                        'Wachowski 2'
-                    ],
-                    actors: [
-                        'Mr Reeves',
-                        'Mr Fishbourne'
-                    ]
-                },
-                {
-                    title: 'Hitch',
-                    poster: 'https://i.ebayimg.com/images/g/DpAAAOSwKIpj9vpq/s-l500.jpg',
-                    directors: [
-                        'Kevin'
-                    ],
-                    actors: [
-                        'Mr Smith',
-                        'Bob'
-                    ]
-                }
-            ]
+            movies: []
+        };
+    },
+
+    mounted() {
+        // Fetch the list of movies from the server
+        fetch('/movies.json')
+            .then(response => response.json())
+            .then(movies => {
+                debugger;
+            });
+
+        // assign my local movies data prop, to the 
+        // server-fetched data
+    },
+
+    computed: {
+        squareMessageLength() {
+            return this.message.length * this.message.length;
+        },
+
+        moviesToDisplay() { 
+            return this.search ? this.doSearch() : this.movies;
         }
     },
 
@@ -47,7 +44,7 @@ createApp({
             // go through the movies and find the ones whose titles (and other?)
             // match the search term
             const searchLower = this.search.toLowerCase();
-            this.movieMatches = this.movies.filter(
+            return this.movies.filter(
                 movie => movie.title.toLowerCase().indexOf(searchLower) != -1
             );
 

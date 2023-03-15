@@ -12,7 +12,7 @@
             <h1>{{ message }}</h1>
 
             <input v-model="search" type="text" placeholder="Search for your favourite movie!">
-            <button @click="doSearch">Search</button>
+            
             <br>
 
             <p v-if="search.length < 3">
@@ -28,7 +28,7 @@
             <section id="recommendations">
 
                 <!-- Wrapper for the movie summary -->
-                <div class="movie" v-for="movie in movieMatches">
+                <div class="movie" v-for="movie in moviesToDisplay">
                     <h2 id="title1" class="renameable" @click="renameTitle(movie)">
                         {{ movie.title }}   
                     </h2>
