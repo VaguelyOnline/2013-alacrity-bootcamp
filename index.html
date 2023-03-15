@@ -4,19 +4,33 @@
             Newflix - a poor Netflix clone :-)
         </title>
         <link rel="stylesheet" href="styles.css">
-        <script defer src="app.js"></script>
+        <script defer src="app.js" type="module"></script>
     </head>
     <body>
 
         <div id="app" v-cloak>
             <h1>{{ message }}</h1>
 
+            <input v-model="search" type="text" placeholder="Search for your favourite movie!">
+            <button @click="doSearch">Search</button>
+            <br>
+
+            <p v-if="search.length < 3">
+                Search term too short!
+            </p>
+            <p v-if="search">
+                You are searching for: {{ search }}
+            </p>
+            <p v-else>
+                You have no search term yet!
+            </p>
+
             <section id="recommendations">
 
                 <!-- Wrapper for the movie summary -->
-                <div class="movie" v-for="movie in movies">
-                    <h2 id="title1" class="renameable">
-                        {{ movie.title }}
+                <div class="movie" v-for="movie in movieMatches">
+                    <h2 id="title1" class="renameable" @click="renameTitle(movie)">
+                        {{ movie.title }}   
                     </h2>
     
                     <div class="poster" :style="getMoviePosterStyle(movie)">
@@ -28,10 +42,16 @@
                         </a>
                     </h3>
                     <h3 class="renameable">
-                        <strong>Director(s)</strong> The Wachowski Brothers
+                        <!-- Fix this - loop over the array of directors to display them -->
+                        <strong>Director(s)</strong>
+                        <span v-for="director in movie.directors">{{ director }} </span>
                     </h3>
                     <h3>
-                        <strong>Cast</strong> Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss, Hugo Weaving, Gloria Foster, Joe Pantoliano, Marcus Chong, Paul Goddard, Robert Taylor, Julian Arahanga, Matt Doran, Belinda McClory, Anthony Ray Parker, Fiona Johnson, Ada Nicodemou, Rowan Witt
+                        <!-- Fix this - loop over the cast to display them -->
+                        <strong>Cast</strong>
+                        <span v-for="actor in actors">
+                            {{ actor }}
+                        </span>
                     </h3>
                     <p class="renameable">
                         Summary....
@@ -42,50 +62,7 @@
             </section>
         </div>
 
-        
 
-        <script type="module">
-            import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
-          
-            createApp({
-
-                data() {
-                    return {
-                        message: 'Welcome to the new and improved Netflix!',
-                        movies: [
-                            {
-                                title: 'The Matrix',
-                                poster: 'https://m.media-amazon.com/images/I/91++WV6FP4L._AC_SL1500_.jpg',
-                                directors: [
-                                    'Wachowski 1',
-                                    'Wachowski 2'
-                                ],
-                                actors: [
-                                    'Mr Reeves',
-                                    'Mr Fishbourne'
-                                ]
-                            },
-                            {
-                                title: 'Hitch',
-                                poster: 'https://i.ebayimg.com/images/g/DpAAAOSwKIpj9vpq/s-l500.jpg',
-                                directors: [
-                                    'Kevin'
-                                ],
-                                actors: [
-                                    'Mr Smith',
-                                    'Bob'
-                                ]
-                            }
-                        ]
-                    }
-                },
-
-                methods: {
-
-                    getMoviePosterStyle: movie => 'background-image: url(' + movie.poster + ')'
-                }
-            }).mount('#app')
-          </script>
 
     </body>
 </html>
