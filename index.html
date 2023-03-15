@@ -47,17 +47,15 @@
                     <h3 class="renameable">
                         <!-- Fix this - loop over the array of directors to display them -->
                         <strong>Director(s)</strong>
-                        <span v-for="director in movie.directors">{{ director }} </span>
+                        <span>{{ movie.director }} </span>
                     </h3>
                     <h3>
                         <!-- Fix this - loop over the cast to display them -->
                         <strong>Cast</strong>
-                        <span v-for="actor in actors">
-                            {{ actor }}
-                        </span>
+                        {{ movies.actors }}
                     </h3>
                     <p class="renameable">
-                        Summary....
+                        {{ movie.plot }}
                     </p>
                 </div>
             </section>

@@ -28,7 +28,7 @@ createApp({
 
     methods: {
 
-        getMoviePosterStyle: movie => 'background-image: url(' + movie.poster + ')',
+        getMoviePosterStyle: movie => 'background-image: url(' + movie.posterUrl + ')',
 
         renameTitle(movie) {
             movie.title = prompt('Rename movie', movie.title);
@@ -46,10 +46,10 @@ createApp({
 
         loadMovies() {
             this.loading = true;
-            fetch('/movies.json')
+            fetch('https://raw.githubusercontent.com/erik-sytnyk/movies-list/master/db.json')
                 .then(response => response.json())
-                .then(movies => {
-                    this.movies = movies;
+                .then(response => {
+                    this.movies = response.movies;
                     this.loading = false;
                 });
         }
