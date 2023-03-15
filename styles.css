@@ -39,3 +39,7 @@
 .renameable:hover {
     cursor: pointer;
 }
+
+[v-cloak] {
+    display: none;
+}
