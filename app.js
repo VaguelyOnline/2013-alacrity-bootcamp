@@ -6,20 +6,14 @@ createApp({
         return {
             message: 'Welcome to the new and improved Netflix!',
             search: '',
-            movies: []
+            movies: [],
+            loading: false
         };
     },
 
     mounted() {
         // Fetch the list of movies from the server
-        fetch('/movies.json')
-            .then(response => response.json())
-            .then(movies => {
-                debugger;
-            });
-
-        // assign my local movies data prop, to the 
-        // server-fetched data
+        this.loadMovies();
     },
 
     computed: {
@@ -48,6 +42,16 @@ createApp({
                 movie => movie.title.toLowerCase().indexOf(searchLower) != -1
             );
 
+        },
+
+        loadMovies() {
+            this.loading = true;
+            fetch('/movies.json')
+                .then(response => response.json())
+                .then(movies => {
+                    this.movies = movies;
+                    this.loading = false;
+                });
         }
     }
 }).mount('#app')
