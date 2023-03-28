@@ -7,7 +7,8 @@ createApp({
             message: 'Welcome to the new and improved Netflix!',
             search: '',
             movies: [],
-            loading: false
+            loading: false,
+            adding: false
         };
     },
 
@@ -52,6 +53,15 @@ createApp({
                     this.movies = movies;
                     this.loading = false;
                 });
+        },
+
+        showNewMovieModal() {
+            const newMovieModal = new bootstrap.Modal(this.$refs.newMovieModal);
+            newMovieModal.show();
+        },
+
+        addMovie() {
+            
         }
     }
 }).mount('#app')
