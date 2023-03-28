@@ -1,14 +1,19 @@
 .movie {
-    max-width: 280;
+    margin-bottom: 30px;
     font-family: 'Open Sans';
-    margin: 15px;
     padding: 30px;
     background-color: lightgoldenrodyellow;
 }
 
+@media(min-width: 768px) {
+
+    .movie {
+        min-height: 900px;
+    }
+}
+
 .movie:hover {
-    background-color: darkblue;
-    color: whitesmoke;
+    background-color: bisque;
     transition: 1s all;
 }
 
@@ -38,4 +43,27 @@
 
 .renameable:hover {
     cursor: pointer;
+}
+
+.trailer-button {
+    padding: 20px;
+    background-color: darkblue;
+    color: yellow;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: inline-block;
+    border-radius: 10px;
+    border: 1px solid darkgrey;
+}
+
+.trailer-button:hover {
+    background-color: blueviolet;
+    color: yellow;
+    transition: 1s all;
+}
+
+@media screen min-width {
+    
 }
