@@ -37,7 +37,11 @@
     </nav>
 
     <main class="container" id="app" v-cloak>
-        <h1>{{ message }}</h1>
+        <h1 class="mb-5">
+          {{ message }}
+
+          <button @click="showNewMovieModal" class="btn btn-outline-info my-3 float-end">Add new movie</button>
+        </h1>
         <button v-if="loading" class="btn btn-primary" type="button" disabled>
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             <span class="visually-hidden">Loading...</span>
@@ -64,11 +68,27 @@
             </div>
         </div>
 
-        <div class="row">
-            <div v-for="movie in moviesToDisplay" class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card">
+        <div class="row mt-5">
+            <div v-for="movie in moviesToDisplay" class="col-sm-6 col-md-4 col-lg-3 mb-5">
+
+                <div class="card movie">
+                    <div class="poster" :style="getMoviePosterStyle(movie)"></div>
                     <div class="card-body">
                         <h5 class="card-title">{{ movie.title }}</h5>
+
+                        <p>
+                          <strong class="me-1">Directed by</strong>
+                          <span class="badge text-bg-info me-1" v-for="director in movie.directors">
+                            {{ director }}
+                          </span>
+                        </p>
+
+                        <p>
+                          <strong class="me-1">Starring</strong>
+                          <span class="badge text-bg-success me-1" v-for="actor in movie.actors">
+                            {{ actor }}
+                          </span>
+                        </p>
 
                         <div class="d-grid gap-2">
                             <a href="#" class="btn btn-outline-secondary">View trailer</a>
@@ -78,7 +98,7 @@
             </div>
         </div>
 
-        <button @click="showNewMovieModal" class="btn btn-outline-info mt-3">Add new movie</button>
+        <button @click="showNewMovieModal" class="btn btn-outline-info my-3">Add new movie</button>
 
         <div ref="newMovieModal" class="modal fade" tabindex="-1">
             <div class="modal-dialog">
@@ -90,17 +110,27 @@
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Email address</label>
-                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                          <label class="form-label">Title</label>
+                          <input type="text" class="form-control" v-model="newMovie.title" placeholder="What is the movie called?">
                         </div>
                         <div class="mb-3">
-                          <label for="exampleInputPassword1" class="form-label">Password</label>
-                          <input type="password" class="form-control" id="exampleInputPassword1">
+                          <label class="form-label">Poster</label>
+                          <input type="text" class="form-control" v-model="newMovie.poster" placeholder="E.g., https://example.com/pic.jpg">
+                          <img v-if="newMovie.poster" :src="newMovie.poster" class="img-thumbnail col-md-4">
                         </div>
-                        <div class="mb-3 form-check">
-                          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        <div class="mb-3">
+                          <label class="form-label">Actors</label>
+                          <p>
+                            <span class="badge text-bg-info me-1" v-for="actor in newMovie.actors">{{ actor }}</span>
+                          </p>
+                          <input @keyup.enter="addActor" type="text" class="form-control" v-model="newActor" placeholder="Enter name and press enter">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Directors</label>
+                          <p>
+                            <span class="badge text-bg-info me-1" v-for="director in newMovie.directors">{{ director }}</span>
+                          </p>
+                          <input @keyup.enter="addDirector" type="text" class="form-control" v-model="newDirector" placeholder="Enter name and press enter">
                         </div>
                     </form>
                 </div>
@@ -109,7 +139,7 @@
                 </div>
               </div>
             </div>
-          </div>
+        </div>
     </main>
 
 

@@ -8,13 +8,19 @@ createApp({
             search: '',
             movies: [],
             loading: false,
-            adding: false
+            adding: false,
+
+            newMovie: this.getBlankMovie(),
+            newActor: '',
+            newDirector: '',
+            modal: null
         };
     },
 
     mounted() {
         // Fetch the list of movies from the server
         this.loadMovies();
+        this.modal = new bootstrap.Modal(this.$refs.newMovieModal);
     },
 
     computed: {
@@ -28,6 +34,15 @@ createApp({
     },
 
     methods: {
+
+        getBlankMovie() {
+            return {
+                title: '',
+                poster: '',
+                actors: [],
+                directors: []
+            };
+        },
 
         getMoviePosterStyle: movie => 'background-image: url(' + movie.poster + ')',
 
@@ -56,12 +71,25 @@ createApp({
         },
 
         showNewMovieModal() {
-            const newMovieModal = new bootstrap.Modal(this.$refs.newMovieModal);
-            newMovieModal.show();
+            this.newMovie = this.getBlankMovie();
+            this.newActor = '';
+            this.newDirector = '';
+            this.modal.show();
         },
 
         addMovie() {
-            
+            this.movies.push(this.newMovie);
+            this.modal.hide();
+        },
+
+        addActor() {
+            this.newMovie.actors.push(this.newActor);
+            this.newActor = '';
+        },
+
+        addDirector() {
+            this.newMovie.directors.push(this.newDirector);
+            this.newDirector = '';
         }
     }
 }).mount('#app')
