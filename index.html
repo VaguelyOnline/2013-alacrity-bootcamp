@@ -68,35 +68,36 @@
             </div>
         </div>
 
-        <div class="row mt-5">
-            <div v-for="movie in moviesToDisplay" class="col-sm-6 col-md-4 col-lg-3 mb-5">
+        
+        <transition-group name="fade" tag="div" class="row mt-5">
+          <div v-for="movie in moviesToDisplay" :key="movie" class="col-sm-6 col-md-4 col-lg-3 mb-5">
 
-                <div class="card movie">
-                    <div class="poster" :style="getMoviePosterStyle(movie)"></div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ movie.title }}</h5>
+              <div class="card movie">
+                  <div class="poster" :style="getMoviePosterStyle(movie)"></div>
+                  <div class="card-body">
+                      <h5 class="card-title">{{ movie.title }}</h5>
 
-                        <p>
-                          <strong class="me-1">Directed by</strong>
-                          <span class="badge text-bg-info me-1" v-for="director in movie.directors">
-                            {{ director }}
-                          </span>
-                        </p>
+                      <p>
+                        <strong class="me-1">Directed by</strong>
+                        <span class="badge text-bg-info me-1" v-for="director in movie.directors">
+                          {{ director }}
+                        </span>
+                      </p>
 
-                        <p>
-                          <strong class="me-1">Starring</strong>
-                          <span class="badge text-bg-success me-1" v-for="actor in movie.actors">
-                            {{ actor }}
-                          </span>
-                        </p>
+                      <p>
+                        <strong class="me-1">Starring</strong>
+                        <span class="badge text-bg-success me-1" v-for="actor in movie.actors">
+                          {{ actor }}
+                        </span>
+                      </p>
 
-                        <div class="d-grid gap-2">
-                            <a href="#" class="btn btn-outline-secondary">View trailer</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                      <div class="d-grid gap-2">
+                          <a href="#" class="btn btn-outline-secondary">View trailer</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </transition-group>
 
         <button @click="showNewMovieModal" class="btn btn-outline-info my-3">Add new movie</button>
 

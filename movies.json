@@ -4,11 +4,6 @@
 	"directors": ["Wachowski 1", "Wachowski 2"],
 	"actors": ["Mr Reeves", "Mr Fishbourne"]
 }, {
-	"title": "Hitch",
-	"poster": "https://i.ebayimg.com/images/g/DpAAAOSwKIpj9vpq/s-l500.jpg",
-	"directors": ["Kevin"],
-	"actors": ["Mr Smith", "Bob"]
-}, {
 	"title": "The Cotton Club",
 	"poster": "https://images-na.ssl-images-amazon.com/images/M/MV5BMTU5ODAyNzA4OV5BMl5BanBnXkFtZTcwNzYwNTIzNA@@._V1_SX300.jpg",
 	"directors": ["Francis Ford Coppola"],
