@@ -30,6 +30,17 @@ createApp({
 
         moviesToDisplay() { 
             return this.search ? this.doSearch() : this.movies;
+        },
+
+        formBad() {
+            return !this.formOk;
+        },
+
+        formOk() {
+            return this.newMovie.title &&
+                this.newMovie.poster &&
+                this.newMovie.actors.length &&
+                this.newMovie.directors.length;
         }
     },
 

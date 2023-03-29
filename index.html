@@ -121,22 +121,37 @@
                         </div>
                         <div class="mb-3">
                           <label class="form-label">Actors</label>
-                          <p>
-                            <span class="badge text-bg-info me-1" v-for="actor in newMovie.actors">{{ actor }}</span>
-                          </p>
+                          <transition name="fade">
+                            <p v-if="newMovie.actors.length">
+                              <transition-group name="fade">
+                                <span class="badge text-bg-info me-1" v-for="actor in newMovie.actors" :key="actor">{{ actor }}</span>
+                              </transition-group>
+                            </p>
+                          </transition>
                           <input @keyup.enter="addActor" type="text" class="form-control" v-model="newActor" placeholder="Enter name and press enter">
                         </div>
                         <div class="mb-3">
                           <label class="form-label">Directors</label>
-                          <p>
-                            <span class="badge text-bg-info me-1" v-for="director in newMovie.directors">{{ director }}</span>
-                          </p>
+                          <transition name="fade">
+                            <p v-if="newMovie.directors.length">
+                              <transition-group name="fade">
+                                <span class="badge text-bg-info me-1" v-for="director in newMovie.directors" :key="director">{{ director }}</span>
+                              </transition-group>
+                            </p>
+                          </transition>
                           <input @keyup.enter="addDirector" type="text" class="form-control" v-model="newDirector" placeholder="Enter name and press enter">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" @click="addMovie">Save movie</button>
+                  <button 
+                    @click="addMovie"
+                    :disabled="formBad"
+                    :class="formOk ? 'btn-primary' : 'btn-outline-secondary'"
+                    type="button" 
+                    class="btn" 
+
+                    >Save movie</button>
                 </div>
               </div>
             </div>
