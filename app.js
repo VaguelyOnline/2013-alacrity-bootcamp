@@ -73,10 +73,9 @@ createApp({
 
         loadMovies() {
             this.loading = true;
-            fetch('/movies.json')
-                .then(response => response.json())
-                .then(movies => {
-                    this.movies = movies;
+            axios.get('/scripts/get-movies.php')
+                .then(response => {
+                    this.movies = response.data;
                     this.loading = false;
                 });
         },
@@ -89,8 +88,20 @@ createApp({
         },
 
         addMovie() {
-            this.movies.push(this.newMovie);
-            this.modal.hide();
+
+            // store the movie in the backend
+            axios.get('/scripts/store-movie.php', {
+                params: this.newMovie
+                })
+                .then(response => {
+                    this.movies.push(this.newMovie);
+                    this.modal.hide();
+                })
+                .catch(error => {
+                    if (error.response.status == 422) {
+
+                    }
+                });
         },
 
         addActor() {
